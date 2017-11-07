@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Station List</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+
+	#custom-search-input {
+		margin:0;
+		margin-top: 10px;
+		padding: 0;
+	}
+
+	#custom-search-input .search-query {
+		padding-right: 3px;
+		padding-right: 4px \9;
+		padding-left: 3px;
+		padding-left: 4px \9;
+		/* IE7-8 doesn't have border-radius, so don't indent the padding */
+
+		margin-bottom: 0;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+	}
+
+	#custom-search-input button {
+		border: 0;
+		background: none;
+		/** belows styles are working good */
+		padding: 2px 5px;
+		margin-top: 2px;
+		position: relative;
+		left: -28px;
+		/* IE7-8 doesn't have border-radius, so don't indent the padding */
+		margin-bottom: 0;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		color:#D9230F;
+	}
+
+	.search-query:focus + button {
+		z-index: 3;   
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h2>Police Station Selection</h2>
+			<div id="custom-search-input">
+				<div class="input-group col-md-12">
+					<input type="text" class="  search-query form-control" placeholder="choose from drop down list..." />
+					<span class="input-group-btn">
+						<button class="btn btn-danger" type="button">
+							<span class=" glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+			<br>
+			<br>
+			<h2>Affiliated Stations</h2>         
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Zip Code</th>
+						<th>Address</th>
+						<th>Phone Number</th>
+						<th>Captain</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>14620</td>
+						<td>123 Main St.</td>
+						<td>585-123-4567</td>
+						<td>Matt Trudeau</td>
+					</tr>
+					<tr>
+						<td>14610</td>
+						<td>456 Intercampus Dr.</td>
+						<td>585-123-4567</td>
+						<td>Oran Alston</td>
+					</tr>
+					<tr>
+						<td>14627</td>
+						<td>400 Library Rd.</td>
+						<td>585-123-4567</td>
+						<td>Nick Liu</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+</body>
+</html>

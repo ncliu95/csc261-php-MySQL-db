@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Personnel Login</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+		body{
+			background: #00589F;
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00589F', endColorstr='#0073CF', GradientType=0);
+			background: -webkit-linear-gradient(to bottom, #00589F 50%, #0073CF) !important;
+			background: -moz-linear-gradient(to bottom, #00589F 50%, #0073CF) !important;
+			background: -ms-linear-gradient(to bottom, #00589F 50%, #0073CF) !important;
+			background: -o-linear-gradient(to bottom, #00589F 50%, #0073CF) !important;
+			background: linear-gradient(to bottom, #00589F 50%, #0073CF) !important;
+			color: black;
+		}
+
+		div.well{
+			height: 250px;
+		} 
+
+		.Absolute-Center {
+			margin: auto;
+			position: absolute;
+			top: 0; left: 0; bottom: 0; right: 0;
+		}
+
+		.Absolute-Center.is-Responsive {
+			width: 50%; 
+			height: 50%;
+			min-width: 200px;
+			max-width: 400px;
+			padding: 40px;
+		}
+
+		#logo-container{
+			margin: auto;
+			margin-bottom: 10px;
+			width:200px;
+			height:30px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="Absolute-Center is-Responsive">
+				<div id="logo-container">
+					<h3>Personnel Login</h3>
+				</div>
+				<div class="col-sm-12 col-md-10 col-md-offset-1">
+					<form action="" id="loginForm">
+						<div class="form-group input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							<input class="form-control" type="text" name='userID' placeholder="Personnel ID"/>          
+						</div>
+						<div class="form-group input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input class="form-control" type="password" name='password' placeholder="Password"/>     
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> Remember me</a>
+							</label>
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-def btn-block" onclick="location.href = './stationlist.html';">Login</button>
+						</div>
+					</form>        
+				</div>  
+			</div>    
+		</div>
+	</div>
+
+</body>
+</html>
