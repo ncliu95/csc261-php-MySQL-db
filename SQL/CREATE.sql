@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS police_db;
+USE police_db;
 create table PERSONNEL (
 	pid INT AUTO_INCREMENT,
 	ssn BIGINT NOT NULL UNIQUE,

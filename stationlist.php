@@ -1,3 +1,19 @@
+<?php
+	session_start();
+	include_once 'dbconnect.php';
+
+	$query = $DBcon->query("SELECT station_id FROM PERSONNEL WHERE pid =".$_SESSION['userSession']);
+	$userRow=$query->fetch_array();
+
+	$query = "SELECT * FROM STATION WHERE id =".$userRow['station_id'];
+	$result = $DBcon->query($query);
+
+	if (isset($_POST['select'])) {
+		$_SESSION['selectedStation'] = $_POST['stationSelect'];
+		//echo '<script type="text/javascript">alert('.$_SESSION['selectedStation'].');</script>';
+		header("Location: station.php");
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,19 +72,24 @@
 	<div class="container">
 		<div class="row">
 			<h2>Police Station Selection</h2>
-			<div id="custom-search-input">
-				<div class="input-group col-md-12">
-					<input type="text" class="  search-query form-control" placeholder="choose from drop down list..." />
-					<span class="input-group-btn">
-						<button class="btn btn-danger" type="button">
-							<span class=" glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</div>
+			<div>
+				<form method="POST">
+					<select name="stationSelect">
+					<?php
+					if ($result->num_rows>0) {
+						while($row=$result->fetch_assoc()) {
+							echo "
+								<option value=".$row['id']."> Address: ".$row['street_address']." ".$row['zip_code']."</option>";
+						}
+					}
+					?>
+					</select>
+					<button type="submit" class="btn-primary btn-def " name="select">Select</button>
+				</form>
 			</div>
 			<br>
 			<br>
-			<h2>Affiliated Stations</h2>         
+			<!--<h2>Affiliated Stations</h2>         
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
@@ -79,26 +100,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>14620</td>
-						<td>123 Main St.</td>
-						<td>585-123-4567</td>
-						<td>Matt Trudeau</td>
-					</tr>
-					<tr>
-						<td>14610</td>
-						<td>456 Intercampus Dr.</td>
-						<td>585-123-4567</td>
-						<td>Oran Alston</td>
-					</tr>
-					<tr>
-						<td>14627</td>
-						<td>400 Library Rd.</td>
-						<td>585-123-4567</td>
-						<td>Nick Liu</td>
-					</tr>
+					<?php
+							while($row =$result->fetch_assoc()) {
+								echo "
+									<tr>
+										<td>".$row['zip_code']."</td>
+										<td>".$row['street_address']."</td>
+										<td>".$row['phone)number']."</td>
+										<td>".$row['captain_pid']."</td>
+									</tr>
+								";
+							}
+						
+					?>
 				</tbody>
-			</table>
+			</table>-->
 		</div>
 	</div>
 

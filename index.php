@@ -1,3 +1,43 @@
+<?php
+	session_start();
+	require_once 'dbconnect.php';
+
+	/*
+	if (isset($_SESSION['ptUserSession'])!="") {
+   		header("Location: .php");
+    	exit;
+	} else if (isset($_SESSION['phyUserSession'])!=""){
+    	header("Location: doctor-profile.php");
+	}*/
+	if (isset($_POST['login'])) {
+	//echo '<script type="text/javascript">console.log("button pressed");</script>';
+
+    $pid = strip_tags($_POST['userID']);
+    $password = strip_tags($_POST['password']);
+
+    $pid = $DBcon->real_escape_string($pid);
+    $password = $DBcon->real_escape_string($password);
+
+    $query = $DBcon->query("SELECT pid, admin, password FROM PERSONNEL WHERE pid='$pid'");
+    $row=$query->fetch_array();
+
+    $count = $query->num_rows; // if email/password are correct returns must be 1 row
+ 	echo '<script type="text/javascript">alert('.$row['admin'].');</script>';
+    if (($password == $row['password']) && $count==1) {
+        $_SESSION['userSession'] = $row['pid'];
+        if ($row['admin'] == '1') {
+        	header("Location: ../phpmyadmin");
+        } else { 
+        	header("Location: stationlist.php");
+        }
+    } else {
+        $msg = "<div class='alert alert-danger'>
+        <span class='glyphicon glyphicon-info-sign'></span> &nbsp; Invalid Username or Password !
+        </div>";
+    }
+    $DBcon->close();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,13 +91,16 @@
 </head>
 <body>
 	<div class="container">
+		<div class = "row">
+			<?php echo $msg ?>
+		</div>
 		<div class="row">
 			<div class="Absolute-Center is-Responsive">
 				<div id="logo-container">
 					<h3>Personnel Login</h3>
 				</div>
 				<div class="col-sm-12 col-md-10 col-md-offset-1">
-					<form action="" id="loginForm">
+					<form id="loginForm" method="POST">
 						<div class="form-group input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 							<input class="form-control" type="text" name='userID' placeholder="Personnel ID"/>          
@@ -72,7 +115,7 @@
 							</label>
 						</div>
 						<div class="form-group">
-							<button type="button" class="btn btn-def btn-block" onclick="location.href = './stationlist.html';">Login</button>
+							<button type="submit" class="btn btn-def btn-block" name="login" id="login">Login</button>
 						</div>
 					</form>        
 				</div>  

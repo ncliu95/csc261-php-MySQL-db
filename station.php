@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php
+	session_start();
+	include_once 'dbconnect.php';
+
+	$query = $DBcon->query("SELECT * FROM STATION WHERE id=".$_SESSION['selectedStation']);
+
+	$stationRow=$query->fetch_assoc();
+?>
 <html>
 <head>
 	<title>Police Station</title>
@@ -26,23 +33,27 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>14620</td>
-						<td>123 Main St.</td>
-						<td>585-123-4567</td>
-						<td>Matt Trudeau</td>
+						<?php
+							echo "
+								<td>".$stationRow['zip_code']."</td>
+								<td>".$stationRow['street_address']."</td>
+								<td>".$stationRow['phone_number']."</td>
+								<td>".$stationRow['captain_pid']."</td>
+								";
+						?>
 					</tr>
 				</tbody>
 			</table>
 			<br><br>
 			<div class="col-md-4">  
-				<button type="button" class="btn btn-primary btn-block" onclick="location.href = './personnel.html';">Personnel</button>
+				<button type="button" class="btn btn-primary btn-block" onclick="location.href = './personnel.php';">Personnel</button>
 			</div>
 
 			<div class="col-md-4">  
-				<button type="button" class="btn btn-primary btn-block" onclick="location.href = './detainees.html';">Detainees</button>
+				<button type="button" class="btn btn-primary btn-block" onclick="location.href = './detainees.php';">Detainees</button>
 			</div>
 			<div class="col-md-4">  
-				<button type="button" class="btn btn-primary btn-block" onclick="location.href = './citations.html';">Citations</button>
+				<button type="button" class="btn btn-primary btn-block" onclick="location.href = './citations.php';">Citations</button>
 			</div>
 		</div>
 	</div>
