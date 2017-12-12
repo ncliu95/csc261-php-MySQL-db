@@ -2,7 +2,7 @@
 session_start();
 include_once 'dbconnect.php';
 
-$query = "SELECT CITATIONS.fine, CITATIONS.pid, CITATIONS.notes FROM CITATIONS LEFT JOIN PERSONNEL ON CITATIONS.pid = PERSONNEL.pid WHERE PERSONNEL.station_id =" . $_SESSION['selectedStation'];
+$query = "SELECT CITATIONS.id, CITATIONS.fine, CITATIONS.pid, CITATIONS.notes FROM CITATIONS LEFT JOIN PERSONNEL ON CITATIONS.pid = PERSONNEL.pid WHERE PERSONNEL.station_id =" . $_SESSION['selectedStation'];
 $results = $DBcon->query($query);
 
 if (isset($_POST['search'])) {
@@ -28,14 +28,19 @@ if (isset($_POST['addButton'])) {
 	if (!empty($_POST['addpid']) && !empty($_POST['addnotes']) && !empty($_POST['addfine'])) {
 			$insertQuery = "INSERT INTO CITATIONS (pid, fine, notes) 
 			VALUES (".$_POST['addpid'].",".$_POST['addfine'].",'".$_POST['addnotes']."');";
-			echo $insertQuery;
+			//echo $insertQuery;
 			if ($DBcon->query($insertQuery)===TRUE) {
 				echo "Detainee Added";
 			} else {
 				echo "Error: ".$DBcon->error;
 			}
 	}
-	//echo "add button pressed";
+}
+
+if (isset($_POST['deleteButton'])) {
+	$deleteQuery = "DELETE FROM CITATIONS WHERE id =".$_POST['deleteButton'];
+	//echo $deleteQuery;
+	$result = $DBcon->query($deleteQuery);
 }
 
 ?>
@@ -54,6 +59,7 @@ if (isset($_POST['addButton'])) {
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<a href="station.php">Return to Stations</a>
 	<div class="container">
 		<div class="row">
 			<h2>Citation List</h2> 
@@ -91,7 +97,10 @@ if (isset($_POST['addButton'])) {
 					<td>".$row['pid']."</td>
 					<td>".$row['fine']."</td>
 					<td>".$row['notes']."</td>
-					<td><button type='button' class='btn btn-primary'>Edit</button></td>
+					<td>
+					<form method='POST'>
+					<button type='submit' class='btn btn-danger' value='".$row['id']."' name='deleteButton'>Delete</button>
+					</form></td>
 				</tr>
 			";}?>
 			</tbody>

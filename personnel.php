@@ -16,9 +16,9 @@ if (isset($_POST['search'])) {
 	} else if ($_POST['attribute'] == "rank"){
 		$searchItem = $_POST['query'];
 		$query = $DBcon->query("SELECT * FROM PERSONNEL WHERE (station_id=".$_SESSION['selectedStation']." AND rank ='".$searchItem."')");
-	} else if ($_POST['attribute'] == "rank"){
+	} else if ($_POST['attribute'] == "salary"){
 		$searchItem = $_POST['query'];
-		$query = $DBcon->query("SELECT * FROM PERSONNEL WHERE (station_id=".$_SESSION['selectedStation']." AND rank ='".$searchItem."')");
+		$query = $DBcon->query("SELECT * FROM PERSONNEL WHERE (station_id=".$_SESSION['selectedStation']." AND slsary ='".$searchItem."')");
 	} else if ($_POST['attribute'] == "position"){
 		$searchItem = $_POST['query'];
 		$query = $DBcon->query("SELECT * FROM PERSONNEL WHERE (station_id=".$_SESSION['selectedStation']." AND employee_type ='".$searchItem."')");
@@ -38,29 +38,29 @@ if (isset($_POST['applyMod'])) {
 		$DBcon->query($modifyQuery);
 	}
 	if (!empty($_POST['modmname'])) {
-		$modifyQuery = "UPDATE PERSONNEL SET middle_name='".$_POST['modfname']."' WHERE pid =".$_SESSION['pidTemp'];
+		$modifyQuery = "UPDATE PERSONNEL SET middle_name='".$_POST['modmname']."' WHERE pid =".$_SESSION['pidTemp'];
 		$DBcon->query($modifyQuery);
 	}
 	if (!empty($_POST['modlname'])) {
-		$modifyQuery = "UPDATE PERSONNEL SET last_name='".$_POST['modfname']."' WHERE pid =".$_SESSION['pidTemp'];
+		$modifyQuery = "UPDATE PERSONNEL SET last_name='".$_POST['modlname']."' WHERE pid =".$_SESSION['pidTemp'];
 		$DBcon->query($modifyQuery);
 	}
 	if (!empty($_POST['modrank'])) {
-		$modifyQuery = "UPDATE PERSONNEL SET rank='".$_POST['modfname']."' WHERE pid =".$_SESSION['pidTemp'];
+		$modifyQuery = "UPDATE PERSONNEL SET rank='".$_POST['modrank']."' WHERE pid =".$_SESSION['pidTemp'];
 		$DBcon->query($modifyQuery);
 	}
 	if (!empty($_POST['modsalary'])) {
-		$modifyQuery = "UPDATE PERSONNEL SET salary='".$_POST['modfname']."' WHERE pid =".$_SESSION['pidTemp'];
+		$modifyQuery = "UPDATE PERSONNEL SET salary='".$_POST['modsalary']."' WHERE pid =".$_SESSION['pidTemp'];
 		$DBcon->query($modifyQuery);
 	}
 	if (!empty($_POST['modposition'])) {
-		$modifyQuery = "UPDATE PERSONNEL SET employee_type='".$_POST['modfname']."' WHERE pid =".$_SESSION['pidTemp'];
+		$modifyQuery = "UPDATE PERSONNEL SET employee_type='".$_POST['modposition']."' WHERE pid =".$_SESSION['pidTemp'];
 		$DBcon->query($modifyQuery);
 	}
 }
 
 if (isset($_POST['addButton'])) {
-	if (!empty($_POST['addfname']) && !empty($_POST['addmname']) && !empty($_POST['addlname']) && !empty($_POST['adddob']) && !empty($_POST['addrank']) && !empty($_POST['addposition']) && !empty($_POST['addsalary']) && !empty($_POST['addaddress']) && !empty($_POST['addzip']) && !empty($_POST['addssn']) && !empty($_POST['addenddate'])) {
+	if (!empty($_POST['addfname']) && !empty($_POST['addmname']) && !empty($_POST['addlname']) && !empty($_POST['adddob']) && !empty($_POST['addrank']) && !empty($_POST['addposition']) && !empty($_POST['addsalary']) && !empty($_POST['addaddress']) && !empty($_POST['addzip']) && !empty($_POST['addssn'])) {
 		$insertQuery = 
 		"INSERT INTO PERSONNEL (station_id,start_date,first_name, middle_name, last_name, dob, rank, employee_type, salary, street_address, zip_code, ssn, end_date)
 		VALUES (".$_SESSION['selectedStation'].",'".date('Y-m-d')."','".$_POST['addfname']."','".$_POST['addmname']."','".$_POST['addlname']."','".$_POST['adddob']."','".$_POST['addrank']."','".$_POST['addposition']."',".$_POST['addsalary'].",'".$_POST['addaddress']."',".$_POST['addzip'].",".$_POST['addssn'].",'".$_POST['addenddate']."');";
@@ -93,6 +93,7 @@ if (isset($_POST['addButton'])) {
 </head>
 <body>
 	<div class="container">
+		<a href="station.php">Return to Station</a>
 		<div class="row">
 			<h2>Personnel List</h2> 
 			<div class="col-md-2">
